@@ -112,23 +112,13 @@
   }
 
   function concertCard(item) {
-    var photoList = Array.isArray(item.photos) ? item.photos.join(",") : "";
-    var coverPhoto =
-      Array.isArray(item.photos) && item.photos.length > 0
-        ? item.photos[0]
-        : "";
-
+    var title = (item.title && (item.title.bg || item.title.en)) || "";
+    var allPhotosList = (item.photos || []).join(",");
     return (
       '<article class="post-card reveal" data-all-photos="' +
-      escapeHtml(photoList) +
+      escapeHtml(allPhotosList) +
       '">' +
-      (coverPhoto
-        ? '<div class="photo-strip"><img src="' +
-          escapeHtml(coverPhoto) +
-          '" alt="" loading="lazy" data-full="' +
-          escapeHtml(coverPhoto) +
-          '"></div>'
-        : "") +
+      photoStrip(item.photos, title) +
       '<div class="body">' +
       '<div class="meta"><time datetime="' +
       escapeHtml(item.date) +
@@ -136,53 +126,60 @@
       formatDate(item.date) +
       "</time>" +
       (item.venue
-        ? '<span class="place">' + escapeHtml(item.venue) + "</span>"
+        ? '<span class="place">' + bilingual(item.venue) + "</span>"
         : "") +
       "</div>" +
       "<h3>" +
-      escapeHtml(item.title) +
+      bilingual(item.title) +
       "</h3>" +
       "<p>" +
-      escapeHtml(item.description) +
+      bilingual(item.description) +
       "</p>" +
-      '<button class="more-details-btn">Виж повече &rarr;</button>' +
+      '<button class="more-details-btn">' +
+      '<span data-lang="bg">Виж повече →</span>' +
+      '<span data-lang="en">Show more →</span>' +
+      "</button>" +
       "</div></article>"
     );
   }
 
   function eventCard(item) {
     var isUpcoming = item.date >= new Date().toISOString().slice(0, 10);
-    var coverPoster = item.poster ? item.poster : "";
-
+    var allPhotosList = item.poster ? item.poster : "";
     return (
       '<article class="post-card reveal" data-all-photos="' +
-      escapeHtml(coverPoster) +
+      escapeHtml(allPhotosList) +
       '">' +
-      (coverPoster
+      (item.poster
         ? '<div class="photo-strip" style="grid-template-columns:1fr;"><img src="' +
-          escapeHtml(coverPoster) +
+          escapeHtml(item.poster) +
           '" alt="" loading="lazy" data-full="' +
-          escapeHtml(coverPoster) +
+          escapeHtml(item.poster) +
           '"></div>'
         : "") +
       '<div class="body">' +
-      (isUpcoming ? '<span class="tag-upcoming">Предстои</span>' : "") +
+      (isUpcoming
+        ? '<span class="tag-upcoming"><span data-lang="bg">Предстои</span><span data-lang="en">Upcoming</span></span>'
+        : "") +
       '<div class="meta"><time datetime="' +
       escapeHtml(item.date) +
       '">' +
       formatDate(item.date) +
       "</time>" +
       (item.venue
-        ? '<span class="place">' + escapeHtml(item.venue) + "</span>"
+        ? '<span class="place">' + bilingual(item.venue) + "</span>"
         : "") +
       "</div>" +
       "<h3>" +
-      escapeHtml(item.title) +
+      bilingual(item.title) +
       "</h3>" +
       "<p>" +
-      escapeHtml(item.description) +
+      bilingual(item.description) +
       "</p>" +
-      '<button class="more-details-btn">Виж повече &rarr;</button>' +
+      '<button class="more-details-btn">' +
+      '<span data-lang="bg">Виж повече &rarr;</span>' +
+      '<span data-lang="en">Show more &rarr;</span>' +
+      "</button>" +
       "</div></article>"
     );
   }
