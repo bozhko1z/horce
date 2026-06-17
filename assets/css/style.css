@@ -138,45 +138,6 @@ img {
   color: var(--gold-light);
 }
 
-/* =========================================================
-     Language toggle — show/hide by data-site-lang on <html>
-     ========================================================= */
-html[data-site-lang="bg"] [data-lang="en"] {
-  display: none !important;
-}
-html[data-site-lang="en"] [data-lang="bg"] {
-  display: none !important;
-}
-
-.lang-switch {
-  display: inline-flex;
-  border: 1.5px solid currentColor;
-  border-radius: var(--radius-pill);
-  overflow: hidden;
-  font-family: var(--font-ui);
-  font-weight: 700;
-  font-size: var(--text-xs);
-  letter-spacing: 0.06em;
-}
-.lang-switch button {
-  border: 0;
-  background: transparent;
-  color: inherit;
-  padding: 0.4rem 0.85rem;
-  cursor: pointer;
-  font-family: inherit;
-  font-weight: inherit;
-  font-size: inherit;
-}
-.lang-switch button[aria-pressed="true"] {
-  background: var(--red);
-  color: var(--paper-soft);
-}
-.on-dark .lang-switch button[aria-pressed="true"] {
-  background: var(--gold);
-  color: var(--night);
-}
-
 /* ==========================================================================
    Seamless Global Auto-Translation Styling Wrappers
    ========================================================================== */
