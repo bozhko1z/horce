@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Администрация — ДЮФА Хорце</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/images/logo.svg" alt="">
+      <span class="brand-text">Хорце<small>Администрация на съдържанието</small></span>
+    </a>
+    <a class="btn btn-ghost" href="index.html" style="border-color:var(--gold); color:var(--gold-light);">← Към сайта</a>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container">
+    <h1>Добавяне на концерти и обяви</h1>
+    <p>Тази страница записва директно във вашето GitHub хранилище — без да е необходимо да пишете код. Достъпна е само за хора, които познават адреса на тази страница и имат GitHub токен; не е свързана към публичното меню на сайта.</p>
+
+    <div class="card" id="settings-card">
+      <h3>1. Връзка с GitHub хранилището</h3>
+      <p class="hint">Направете това веднъж на това устройство. Данните се пазят само в този браузър.</p>
+      <div class="form-grid">
+        <div class="two-col">
+          <div class="field">
+            <label for="gh-owner">GitHub потребител / организация</label>
+            <input type="text" id="gh-owner" placeholder="напр. horce-ensemble">
+          </div>
+          <div class="field">
+            <label for="gh-repo">Име на хранилището (repo)</label>
+            <input type="text" id="gh-repo" placeholder="напр. horce-website">
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="gh-branch">Branch</label>
+            <input type="text" id="gh-branch" value="main">
+          </div>
+          <div class="field">
+            <label for="gh-token">Personal Access Token</label>
+            <input type="password" id="gh-token" placeholder="ghp_…">
+            <span class="hint">Създайте „Fine-grained token“ от GitHub → Settings → Developer settings, само за това хранилище, с право „Contents: Read and write“. Не споделяйте този токен.</span>
+          </div>
+        </div>
+        <div style="display:flex; gap: var(--space-3); flex-wrap:wrap;">
+          <button type="button" class="btn" id="btn-save-settings">Запази връзката</button>
+          <button type="button" class="btn btn-ghost on-light" id="btn-test-connection">Тествай връзката</button>
+          <button type="button" class="btn btn-ghost on-light" id="btn-clear-settings">Изчисти запазените данни</button>
+        </div>
+        <div id="settings-status"></div>
+      </div>
+    </div>
+
+    <div class="hora-divider" style="margin: var(--space-6) 0;"></div>
+
+    <div class="tabs">
+      <button type="button" class="active" data-tab="concert">Концерт</button>
+      <button type="button" data-tab="event">Обява за събитие</button>
+    </div>
+
+    <!-- ===================== CONCERT TAB ===================== -->
+    <div class="tab-panel active" id="panel-concert">
+      <h2>Нов концерт</h2>
+      <p class="hint">Попълнете след всяко изпълнение. Снимките се качват автоматично в правилната папка.</p>
+      <form id="form-concert" class="form-grid">
+        <div class="field">
+          <label for="c-date">Дата</label>
+          <input type="date" id="c-date" required>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="c-title-bg">Заглавие (БГ)</label>
+            <input type="text" id="c-title-bg" placeholder="напр. Концерт за Деня на будителите" required>
+          </div>
+          <div class="field">
+            <label for="c-title-en">Заглавие (EN)</label>
+            <input type="text" id="c-title-en" placeholder="e.g. Awakeners' Day concert">
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="c-venue-bg">Място (БГ)</label>
+            <input type="text" id="c-venue-bg" placeholder="напр. Читалище „…“, гр. Мездра">
+          </div>
+          <div class="field">
+            <label for="c-venue-en">Място (EN)</label>
+            <input type="text" id="c-venue-en" placeholder="e.g. Chitalishte, Mezdra">
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="c-desc-bg">Описание (БГ)</label>
+            <textarea id="c-desc-bg" placeholder="Какво се случи, кой участва, как премина концертът…"></textarea>
+          </div>
+          <div class="field">
+            <label for="c-desc-en">Описание (EN)</label>
+            <textarea id="c-desc-en" placeholder="What happened, who took part, how the concert went…"></textarea>
+          </div>
+        </div>
+        <div class="field">
+          <label for="c-photos">Снимки</label>
+          <input type="file" id="c-photos" accept="image/*" multiple>
+          <span class="hint">Можете да изберете няколко снимки наведнъж. По-малки файлове (под ~5 МБ) се качват по-бързо.</span>
+          <div class="thumb-preview" id="c-preview"></div>
+        </div>
+        <div id="c-status"></div>
+        <div>
+          <button type="submit" class="btn">Запази концерта</button>
+        </div>
+      </form>
+
+      <h3 style="margin-top: var(--space-6);">Съществуващи концерти</h3>
+      <div class="card" id="list-concerts"><p class="hint">Свържете се с GitHub по-горе, за да видите списъка.</p></div>
+    </div>
+
+    <!-- ===================== EVENT TAB ===================== -->
+    <div class="tab-panel" id="panel-event">
+      <h2>Нова обява за събитие</h2>
+      <p class="hint">Попълнете преди всяко голямо предстоящо събитие, за да го видят посетителите на сайта.</p>
+      <form id="form-event" class="form-grid">
+        <div class="field">
+          <label for="e-date">Дата на събитието</label>
+          <input type="date" id="e-date" required>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="e-title-bg">Заглавие (БГ)</label>
+            <input type="text" id="e-title-bg" placeholder="напр. Лятен фолклорен фестивал" required>
+          </div>
+          <div class="field">
+            <label for="e-title-en">Заглавие (EN)</label>
+            <input type="text" id="e-title-en" placeholder="e.g. Summer folklore festival">
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="e-venue-bg">Място (БГ)</label>
+            <input type="text" id="e-venue-bg" placeholder="напр. Площад „…“, гр. Мездра">
+          </div>
+          <div class="field">
+            <label for="e-venue-en">Място (EN)</label>
+            <input type="text" id="e-venue-en" placeholder="e.g. Main square, Mezdra">
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label for="e-desc-bg">Описание (БГ)</label>
+            <textarea id="e-desc-bg" placeholder="Какво ще се случи, кой може да дойде, друга важна информация…"></textarea>
+          </div>
+          <div class="field">
+            <label for="e-desc-en">Описание (EN)</label>
+            <textarea id="e-desc-en" placeholder="What will happen, who can come, other important info…"></textarea>
+          </div>
+        </div>
+        <div class="field">
+          <label for="e-poster">Плакат / снимка (по желание)</label>
+          <input type="file" id="e-poster" accept="image/*">
+          <div class="thumb-preview" id="e-preview"></div>
+        </div>
+        <div id="e-status"></div>
+        <div>
+          <button type="submit" class="btn">Публикувай обявата</button>
+        </div>
+      </form>
+
+      <h3 style="margin-top: var(--space-6);">Съществуващи обяви</h3>
+      <div class="card" id="list-events"><p class="hint">Свържете се с GitHub по-горе, за да видите списъка.</p></div>
+    </div>
+
+  </div>
+</section>
+
+<script src="assets/js/admin.js"></script>
+</body>
+</html>

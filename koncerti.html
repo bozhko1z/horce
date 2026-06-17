@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="bg" data-site-lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Концерти — ДЮФА Хорце</title>
+<meta name="description" content="Снимки и разкази от концертите на ДЮФА Хорце.">
+<link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/images/logo.png" alt="">
+      <span class="brand-text">Хорце<small data-lang="bg">Детско-юношески фолклорен ансамбъл</small><small data-lang="en">Children &amp; youth folklore ensemble</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="Меню" aria-expanded="false">☰</button>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="index.html" data-lang="bg">Начало</a><a href="index.html" data-lang="en">Home</a></li>
+        <li><a href="istoriya.html" data-lang="bg">История</a><a href="istoriya.html" data-lang="en">History</a></li>
+        <li><a href="koncerti.html" aria-current="page" data-lang="bg">Концерти</a><a href="koncerti.html" aria-current="page" data-lang="en">Concerts</a></li>
+        <li><a href="obyavi.html" data-lang="bg">Обяви</a><a href="obyavi.html" data-lang="en">Announcements</a></li>
+      </ul>
+      <div class="lang-switch" role="group" aria-label="Език / Language">
+        <button type="button" data-lang="bg" aria-pressed="true">БГ</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding-bottom: var(--space-5);">
+  <div class="container">
+    <span class="eyebrow" data-lang="bg">След всяко изпълнение</span>
+    <span class="eyebrow" data-lang="en">After every performance</span>
+    <h1 style="font-size: var(--text-3xl);" data-lang="bg">Концерти</h1>
+    <h1 style="font-size: var(--text-3xl);" data-lang="en">Concerts</h1>
+    <p class="tagline" data-lang="bg">Снимки и разкази от всяко изпълнение — къде сме били, какво играхме, как премина.</p>
+    <p class="tagline" data-lang="en">Photos and notes from every show — where we went, what we performed, how it went.</p>
+  </div>
+</section>
+
+<div class="hora-divider gold"></div>
+
+<section>
+  <div class="container">
+    <div id="concerts-list" class="grid grid-3" aria-live="polite">
+      <div class="empty-state">
+        <span data-lang="bg">Зареждане…</span>
+        <span data-lang="en">Loading…</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" role="dialog" aria-modal="true" aria-label="Снимка на цял екран">
+  <button class="lightbox-close" aria-label="Затвори">×</button>
+  <img src="" alt="">
+</div>
+
+<div class="hora-divider"></div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div>
+      <strong data-lang="bg">ДЮФА Хорце</strong><strong data-lang="en">Horce Folklore Ensemble</strong>
+      <p class="foot-note" data-lang="bg">© <span data-year></span> ДЮФА Хорце. Сайт, поддържан от екипа на ансамбъла.</p>
+      <p class="foot-note" data-lang="en">© <span data-year></span> Horce Folklore Ensemble. Site maintained by the ensemble's team.</p>
+    </div>
+    <div>
+      <a href="admin.html" data-lang="bg">За екипа: добавяне на съдържание</a>
+      <a href="admin.html" data-lang="en">For the team: add content</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/posts.js"></script>
+<script>HorcePosts.renderConcerts("#concerts-list");</script>
+</body>
+</html>

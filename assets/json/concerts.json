@@ -1,0 +1,19 @@
+[
+    {
+      "id": "example-concert-1",
+      "date": "2026-05-10",
+      "title": {
+        "bg": "ПРИМЕР — изтрийте този запис: Пролетен концерт",
+        "en": "EXAMPLE — delete this entry: Spring concert"
+      },
+      "venue": {
+        "bg": "Читалище „Пример“, гр. Мездра",
+        "en": "Chitalishte \"Example\", Mezdra"
+      },
+      "description": {
+        "bg": "Това е примерен запис, който показва как изглежда картичка за концерт. Изтрийте го веднъж щом добавите истински концерт през admin.html, или го заменете директно тук.",
+        "en": "This is a sample entry showing how a concert card looks. Delete it once you add a real concert through admin.html, or edit it directly here."
+      },
+      "photos": []
+    }
+  ]

@@ -1,0 +1,19 @@
+[
+    {
+      "id": "example-event-1",
+      "date": "2026-09-15",
+      "title": {
+        "bg": "ПРИМЕР — изтрийте този запис: Есенен фолклорен фестивал",
+        "en": "EXAMPLE — delete this entry: Autumn folklore festival"
+      },
+      "venue": {
+        "bg": "Площад „Пример“, гр. Мездра",
+        "en": "Example Square, Mezdra"
+      },
+      "description": {
+        "bg": "Това е примерна обява за предстоящо събитие. Изтрийте я веднъж щом обявите истинско събитие през admin.html, или я заменете директно тук.",
+        "en": "This is a sample announcement for an upcoming event. Delete it once you publish a real event through admin.html, or edit it directly here."
+      },
+      "poster": ""
+    }
+  ]
