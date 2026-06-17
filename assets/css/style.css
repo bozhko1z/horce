@@ -541,6 +541,17 @@ section {
   display: flex;
   flex-direction: column;
 }
+.post-card .body p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;           /* Keeps only the first 3 lines of text */
+  -webkit-box-orient: vertical;  
+  overflow: hidden;                /* Hides any sentences past line 3 */
+  text-overflow: ellipsis;         /* Smoothly appends the "..." character */
+  
+  margin-top: 0;
+  margin-bottom: var(--space-3);   /* Creates a clean vertical gap before the button */
+  line-height: 1.5;                /* Ensures text spacing is completely predictable */
+}
 .post-card .meta {
   font-family: var(--font-ui);
   font-size: var(--text-xs);
