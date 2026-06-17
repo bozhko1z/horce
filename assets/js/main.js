@@ -2,67 +2,6 @@
 (function () {
   "use strict";
 
-  var LANG_KEY = "horce-lang";
-
-  // 1. Initialize Google Translate Element silently
-  window.googleTranslateElementInit = function () {
-    new google.translate.TranslateElement(
-      {
-        pageLanguage: "bg",
-        includedLanguages: "en,bg",
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false,
-      },
-      "google_translate_element"
-    );
-  };
-
-  function applyLang(lang) {
-    document.documentElement.setAttribute("data-site-lang", lang);
-    document.querySelectorAll(".lang-switch button").forEach(function (btn) {
-      btn.setAttribute(
-        "aria-pressed",
-        btn.dataset.lang === lang ? "true" : "false"
-      );
-    });
-
-    // Trigger native Google Translate iframe engine selection programmatically
-    var googleSelect = document.querySelector(".goog-te-combo");
-    if (googleSelect) {
-      googleSelect.value = lang;
-      googleSelect.dispatchEvent(new Event("change"));
-    }
-  }
-
-  function initLangSwitch() {
-    // Inject Google's core translation frame controller script dynamically
-    var s = document.createElement("script");
-    s.src =
-      "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-    document.body.appendChild(s);
-
-    // Setup hidden target anchor mount point for Google's controller
-    var gDiv = document.createElement("div");
-    gDiv.id = "google_translate_element";
-    gDiv.style.display = "none";
-    document.body.appendChild(gDiv);
-
-    var saved = localStorage.getItem(LANG_KEY) || "bg";
-
-    // Delay initial language sync slightly so the iframe combo boxes have time to mount
-    setTimeout(function () {
-      applyLang(saved);
-    }, 800);
-
-    document.querySelectorAll(".lang-switch button").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var lang = btn.dataset.lang;
-        localStorage.setItem(LANG_KEY, lang);
-        applyLang(lang);
-      });
-    });
-  }
-
   function initMobileNav() {
     var toggle = document.querySelector(".nav-toggle");
     var nav = document.querySelector(".site-nav");
@@ -133,7 +72,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    initLangSwitch();
     initMobileNav();
     initReveal();
     initFooterYear();
