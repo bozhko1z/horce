@@ -113,8 +113,11 @@
 
   function concertCard(item) {
     var title = (item.title && (item.title.bg || item.title.en)) || "";
+    var allPhotosList = (item.photos || []).join(",");
     return (
-      '<article class="post-card reveal">' +
+      '<article class="post-card reveal" data-all-photos="' +
+      escapeHtml(allPhotosList) +
+      '">' +
       photoStrip(item.photos, title) +
       '<div class="body">' +
       '<div class="meta"><time datetime="' +
@@ -142,8 +145,11 @@
 
   function eventCard(item) {
     var isUpcoming = item.date >= new Date().toISOString().slice(0, 10);
+    var allPhotosList = item.poster ? item.poster : "";
     return (
-      '<article class="post-card reveal">' +
+      '<article class="post-card reveal" data-all-photos="' +
+      escapeHtml(allPhotosList) +
+      '">' +
       (item.poster
         ? '<div class="photo-strip" style="grid-template-columns:1fr;"><img src="' +
           escapeHtml(item.poster) +
@@ -293,7 +299,6 @@
       var card = btn.closest(".post-card");
       if (!card) return;
 
-      // Clone element text/HTML fields safely
       var titleHtml = card.querySelector("h3")
         ? card.querySelector("h3").innerHTML
         : "";
@@ -304,15 +309,34 @@
         ? card.querySelector("p").innerHTML
         : "";
 
-      // Extract layout photos if present to append them full-sized inside the window
-      var photoStrip = card.querySelector(".photo-strip");
+      // Read our new hidden comma-separated photo list attribute
+      var allPhotosAttr = card.getAttribute("data-all-photos") || "";
       var modalPhotosHtml = "";
-      if (photoStrip) {
+
+      if (allPhotosAttr) {
+        // Split the string back into an array of image URLs
+        var photoArray = allPhotosAttr.split(",").filter(Boolean);
+
+        if (photoArray.length > 0) {
+          modalPhotosHtml =
+            '<div class="modal-photo-gallery">' +
+            photoArray
+              .map(function (src) {
+                return (
+                  '<img src="' +
+                  escapeHtml(src) +
+                  '" alt="Gallery Image" loading="lazy">'
+                );
+              })
+              .join("") +
+            "</div>";
+        }
+      } else {
+        // Fallback message if there are genuinely zero photos uploaded
         modalPhotosHtml =
-          '<div class="modal-photo-gallery">' + photoStrip.innerHTML + "</div>";
+          '<div class="no-photo"><span data-lang="bg">Няма прикачени снимки</span><span data-lang="en">No photos attached</span></div>';
       }
 
-      // Build pop-up container markup
       var modalOverlay = document.createElement("div");
       modalOverlay.className = "info-modal-overlay";
       modalOverlay.innerHTML =
@@ -333,11 +357,11 @@
         "</div>";
 
       document.body.appendChild(modalOverlay);
-      document.body.style.overflow = "hidden"; // Block page content scroll behind modal
+      document.body.style.overflow = "hidden";
 
       function closeModal() {
         modalOverlay.remove();
-        document.body.style.overflow = ""; // Re-enable background scrolling
+        document.body.style.overflow = "";
       }
 
       modalOverlay
