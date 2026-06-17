@@ -472,6 +472,101 @@
     color: var(--ink);
     opacity: .7;
   }
+
+  /* ==========================================================================
+   Card Text Truncation & Info Modal
+   ========================================================================== */
+
+/* 1. Limit the card description to exactly 3 lines on the main page */
+.card p, 
+#concerts-list .card-desc, 
+#events-list .card-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: var(--space-3);
+}
+
+/* 2. Styling for the "Show More" Action Link/Button */
+.more-details-btn {
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  margin-top: auto; /* Pushes button to bottom of card if using flex */
+  display: inline-block;
+}
+.more-details-btn:hover {
+  color: var(--red);
+}
+
+/* 3. The Modal Background Overlay */
+.info-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(27, 23, 20, 0.75); /* var(--ink) with transparency */
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  opacity: 0; animation: fadeIn 0.25s forwards;
+}
+
+/* 4. The Mini Window Container */
+.info-modal-window {
+  background: var(--paper-soft);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 650px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  padding: var(--space-5);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  transform: translateY(20px); animation: slideUp 0.25s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+/* 5. Elements inside the Pop-up */
+.info-modal-close {
+  position: absolute;
+  top: var(--space-3); right: var(--space-3);
+  background: transparent; border: none;
+  font-size: 2rem; color: var(--ink); cursor: pointer;
+  line-height: 1; opacity: 0.6; transition: opacity 0.2s;
+}
+.info-modal-close:hover { opacity: 1; color: var(--red); }
+
+.info-modal-content img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-4);
+  border: 1px solid var(--paper-line);
+}
+
+/* Modal text resets default line-clipping so we see everything */
+.info-modal-content p {
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+/* Animations */
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes slideUp { to { transform: translateY(0); } }
   
   /* =========================================================
      Lightbox (concert photo viewer)
