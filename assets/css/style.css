@@ -177,6 +177,32 @@ html[data-site-lang="en"] [data-lang="bg"] {
   color: var(--night);
 }
 
+/* ==========================================================================
+   Seamless Global Auto-Translation Styling Wrappers
+   ========================================================================== */
+
+/* Hide the top white Google frame bar completely */
+.goog-te-banner-frame,
+.goog-te-banner,
+.skiptranslate,
+iframe[id*=":run"] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Fix the layout shift caused by Google pushing down body layouts */
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+/* Prevent text highlighting styling breaks on hover items */
+.goog-text-highlight {
+  background: transparent !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+}
+
 /* =========================================================
      Hora-chain divider — repeating linked-hands motif.
      The hora is the joined-hand circle dance the group is named
@@ -543,14 +569,16 @@ section {
 }
 .post-card .body p {
   display: -webkit-box;
-  -webkit-line-clamp: 3;           /* Keeps only the first 3 lines of text */
-  -webkit-box-orient: vertical;  
-  overflow: hidden;                /* Hides any sentences past line 3 */
-  text-overflow: ellipsis;         /* Smoothly appends the "..." character */
-  
+  -webkit-line-clamp: 3; /* Keeps only the first 3 lines of text */
+  -webkit-box-orient: vertical;
+  overflow: hidden; /* Hides any sentences past line 3 */
+  text-overflow: ellipsis; /* Smoothly appends the "..." character */
+
   margin-top: 0;
-  margin-bottom: var(--space-3);   /* Creates a clean vertical gap before the button */
-  line-height: 1.5;                /* Ensures text spacing is completely predictable */
+  margin-bottom: var(
+    --space-3
+  ); /* Creates a clean vertical gap before the button */
+  line-height: 1.5; /* Ensures text spacing is completely predictable */
 }
 .post-card .meta {
   font-family: var(--font-ui);
