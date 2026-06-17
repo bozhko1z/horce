@@ -176,6 +176,10 @@
       "<p>" +
       bilingual(item.description) +
       "</p>" +
+      '<button class="more-details-btn">' +
+      '<span data-lang="bg">Виж повече &rarr;</span>' +
+      '<span data-lang="en">Show more &rarr;</span>' +
+      "</button>" +
       "</div></article>"
     );
   }
