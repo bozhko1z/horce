@@ -1,10 +1,10 @@
 [
   {
-    "id": "c1781690215302",
-    "date": "2026-06-17",
+    "id": "c1781693082927",
+    "date": "2026-06-09",
     "title": {
-      "bg": "Test1",
-      "en": "Test1EN"
+      "bg": "Test2",
+      "en": "Test2EN"
     },
     "venue": {
       "bg": "Лом",
@@ -15,11 +15,11 @@
       "en": "Фолклорът и неговата културна идентичност!❤️🇧🇬🌿\nТази вечер многобройната публика истински се наслади на един впечатляващ концерт!🤗🎶🇧🇬\nVenislav Rafailov, Вени, моите искрени адмирации за твоя висок професионализъм, отдаденост и любов към тези прекрасни деца и младежи!❤️"
     },
     "photos": [
-      "assets/images/concerts/2026-06-17-test1/1-kon1.jpg",
-      "assets/images/concerts/2026-06-17-test1/2-kon2.jpg",
-      "assets/images/concerts/2026-06-17-test1/3-kon3.jpg",
-      "assets/images/concerts/2026-06-17-test1/4-kon4.jpg",
-      "assets/images/concerts/2026-06-17-test1/5-kon5.jpg"
+      "assets/images/concerts/2026-06-09-test2/1-kon1.jpg",
+      "assets/images/concerts/2026-06-09-test2/2-kon2.jpg",
+      "assets/images/concerts/2026-06-09-test2/3-kon3.jpg",
+      "assets/images/concerts/2026-06-09-test2/4-kon4.jpg",
+      "assets/images/concerts/2026-06-09-test2/5-kon5.jpg"
     ]
   }
 ]
